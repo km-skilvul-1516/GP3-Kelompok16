@@ -49,7 +49,7 @@ class AuthController {
           const accessToken = jwt.sign({ username: user.username,  role: user.role }, process.env.TOKEN_SECRET);
           res.json({
             message: "Login success",
-            accessToken
+            accessToken: accessToken
           });
         } else {
           res.json({
