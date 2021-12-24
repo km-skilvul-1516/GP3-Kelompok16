@@ -8,7 +8,7 @@ class AuthController {
     // hash password
     // create a new user object
     // save to db
-    const { email, password } = req.body;
+    const { first_name, last_name, no_telepon, email, password } = req.body;
 
     try {
       const salt = await bcrypt.genSalt(10);
@@ -17,6 +17,9 @@ class AuthController {
         salt
       );
       const user = new AuthModel({
+        first_name: first_name,
+        last_name: last_name,
+        no_telepon: no_telepon,
         email: email,
         password: hashesPassword,
       });
