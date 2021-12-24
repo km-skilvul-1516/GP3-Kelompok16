@@ -19,6 +19,7 @@ class BlogController {
         photo: photo,
         author: author,
         categories: categories,
+        image: req.file.path,
       });
       
       const saved = await blog.save();
@@ -103,6 +104,29 @@ class BlogController {
         res.status(401).json("can delete only your post!");
       }
     } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async storage() {
+    try {
+      return multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, "./uploads");
+        },
+        filename: function (req, file, cb) {
+          cb(null, file.originalname);
+        },
+      });
+    } catch (error) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async uploadImage() {
+    try {
+      multer({ storage: storage() }).single("image");
+    } catch (error) {
       res.status(500).json(err);
     }
   }
