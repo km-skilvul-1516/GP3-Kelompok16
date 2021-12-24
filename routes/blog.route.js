@@ -24,8 +24,8 @@ const uploadImg = multer({ storage: storage }).single(
 
 router.post("/blogs", BlogController.postNewBlog, uploadImg);
 router.get("/blogs", BlogController.getAllBlog);
-router.get("/blogs:id", BlogController.getBlogByID);
-router.put("/blogs:id", BlogController.updateBlog);
-router.delete("/blogs:id", BlogController.deleteBlog);
+router.get("/blogs/:id", BlogController.getBlogByID);
+router.put("/blogs/:id", BlogController.updateBlog);
+router.delete("/blogs/:id", BlogController.deleteBlog);
 
 module.exports = router;

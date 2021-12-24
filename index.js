@@ -5,7 +5,6 @@ dotenv.config();
 
 const express = require("express");
 
-const artisRoutes = require("./routes/artis.route");
 const authRoutes = require("./routes/auth.route");
 const blogRoutes = require("./routes/blog.route");
 const categoryRoutes = require("./routes/category.route");
@@ -36,7 +35,6 @@ async function main() {
     app.use(express.json()); // agar kita bisa ambil request body json
     app.use("/images", express.static(path.join(__dirname, "/images")));
 
-    app.use(artisRoutes);
     app.use(psikologRoutes);
     app.use(userRoutes);
     app.use(authRoutes);
