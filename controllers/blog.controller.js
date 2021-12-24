@@ -19,7 +19,6 @@ class BlogController {
         photo: photo,
         author: author,
         categories: categories,
-        image: req.file.path,
       });
       
       const saved = await blog.save();
@@ -56,7 +55,7 @@ class BlogController {
   //GET BY ID
   static async getBlogByID(req, res) {
     try {
-      const post = await Post.findById(req.params.id);
+      const post = await BlogModel.findById(req.params.id);
       res.status(200).json(post);
     } catch (err) {
       res.status(500).json(err);
@@ -67,7 +66,7 @@ class BlogController {
   static async updateBlog(req, res) {
     try {
       const post = await BlogModel.findById(req.params.id);
-      if (post.author === req.body.username) {
+      if (post.author === req.body.author) {
         try {
           const updatedPost =
             await BlogModel.findByIdAndUpdate(
@@ -86,6 +85,7 @@ class BlogController {
       }
     } catch (err) {
       res.status(500).json(err);
+      console.log(err)
     }
   }
 
@@ -105,6 +105,7 @@ class BlogController {
       }
     } catch (err) {
       res.status(500).json(err);
+      console.log(err);
     }
   }
 

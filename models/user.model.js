@@ -24,12 +24,12 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     no_telp: {
-      type: Integer,
+      type: String,
       required: true,
     },
-    likedBlog: {
-      type: Array
-    }
+    // likedBlog: {
+    //   type: Array
+    // }
   },
 );
 

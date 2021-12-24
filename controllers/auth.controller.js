@@ -1,6 +1,7 @@
 const AuthModel = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/user.model");
+const jwt = require('jsonwebtoken');
 
 class AuthController {
   static async postRegister(req, res) {
@@ -8,7 +9,7 @@ class AuthController {
     // hash password
     // create a new user object
     // save to db
-    const { first_name, last_name, no_telepon, email, password } = req.body;
+    const { first_name, last_name, no_telp, email, password } = req.body;
 
     try {
       const salt = await bcrypt.genSalt(10);
@@ -19,8 +20,8 @@ class AuthController {
       const user = new AuthModel({
         first_name: first_name,
         last_name: last_name,
-        no_telepon: no_telepon,
-        email: email,
+        no_telp: no_telp,
+        email: email, 
         password: hashesPassword,
       });
 
@@ -49,7 +50,7 @@ class AuthController {
           user.password
         );
         if (auth) {
-          const accessToken = jwt.sign({ username: user.username,  role: user.role }, process.env.TOKEN_SECRET);
+          const accessToken = jwt.sign({ username: user.username,  role: user.role }, process.env.SECRET_TOKEN);
           res.json({
             message: "Login success",
             accessToken: accessToken
